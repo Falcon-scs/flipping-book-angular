@@ -1,0 +1,70 @@
+<div class="sidenav"
+    [class.animate]="!resizingWindow"
+    [style.width.vw]="opened ? 34 : 0"
+    [style.opacity]="opened ? 1 : 0">
+
+    <div class="topbar">
+        <span class="title">Revision {{revision}}</span>
+        <button mat-icon-button (click)="closeMessageBox()">
+            <mat-icon svgIcon="close" style="width: 16px;height: 16px;"></mat-icon>
+        </button>
+    </div>
+
+    <div class="timeline">
+        <div *ngFor="let item of timeline; let i = index"
+            class="msg-container"
+            [style.align-self]="item.owner === 1 ? 'flex-start' : 'flex-end'">
+
+            <div class="msg-box">
+                <div class="msg-tile-row">
+
+                    <mat-icon class="icon-alert"
+                      [style.color]="item.type === 0 ? '#007bc3' : item.content.status === 0 ? '#FF6E6E' : '#428f40'"
+                      [svgIcon]="item.type === 0 ? 'message' : item.content.status === 0 ? 'warning' : 'complete'">
+                    </mat-icon>
+
+                    <span class="msg-alert"
+                      [style.color]="item.type === 0 ? '#007bc3' : item.content.status === 0 ? '#FF6E6E' : '#428f40'">
+                      {{item.type === 0 ? 'Message' : item.content.status === 0 ? 'Change requested' : 'Change completed'}}
+                    </span>
+
+                    <span class="date">&middot; {{item.date | date: 'EEEE hh:mm a'}}</span>
+                </div>
+                <div class="msg-content">
+                    <div *ngIf="item.type==1" class="msg-photo">
+                        <img [src]="getMessageThumb(item)">
+                    </div>
+                    <div class="msg-text">
+                        <p *ngIf="item.type==0" class="msg-change-title">{{item.from.name}}</p>
+                        <p *ngIf="item.type==0" class="msg-change-filename">{{item.content}}</p>
+                        <p *ngIf="item.type==1" class="msg-change-title">{{item.content.action}}</p>
+                        <p *ngIf="item.type==1" class="msg-change-filename">{{item.content.thumbnail}}</p>
+
+                        <p *ngIf="item.type==1 && item.content.status==0" class="msg-change-status required">PENDING</p>
+                        <p *ngIf="item.type==1 && item.content.status==1" class="msg-change-status completed">DONE</p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngFor="let user of item.readBy">
+                <img class="msg-from-avata" [src]="user.avatar">
+            </div>
+
+        </div>
+
+        <button mat-raised-button color="accent" class="approveBtn" (click)="onApprove()">APPROVE</button>
+    </div>
+
+    <div class="messageBox">
+        <mat-form-field>
+            <textarea matInput maxlength="120" rows="2" [(ngModel)]="message"
+            placeholder="Start typing" style="resize: none"></textarea>
+            <mat-hint align="end">{{message.length}} / 120</mat-hint>
+        </mat-form-field>
+        <div class="divider"></div>
+        <button mat-icon-button (click)="sendMessage()">
+            <mat-icon svgIcon="send"></mat-icon>
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="title">
+  <span>{{title}}</span>
+</div>
+<div class="buttons">
+    <button mat-icon-button>
+        <mat-icon class="small-icon-button" svgIcon="share"></mat-icon>
+    </button>
+    <button mat-icon-button (click)="exit()">
+        <mat-icon class="small-icon-button" svgIcon="contract"></mat-icon>
+    </button>
+</div>
+<div class="main">
+  <div class="book-container">
+    <div class="left-bar">
+      <button mat-icon-button (click)="flipService.prev.next()">
+        <mat-icon svgIcon="left-arrow"></mat-icon>
+      </button>
+    </div>
+    <div class="book">
+      <ngx-flipbook [model]="flipService.book"></ngx-flipbook>
+    </div>
+    <div class="right-bar">
+      <button mat-icon-button (click)="flipService.next.next()">
+        <mat-icon svgIcon="right-arrow"></mat-icon>
+      </button>
+    </div>
+    <div class="bottom-bar">
+      <span>1</span>
+      <span>2</span>
+      <div class="bottom-bar-center">
+          <button mat-icon-button (click)="flipService.play.next()">
+            <mat-icon svgIcon="play"></mat-icon>
+          </button>
+          <button mat-icon-button (click)="flipService.pause.next()">
+            <mat-icon svgIcon="pause"></mat-icon>
+          </button>
+        </div>
+    </div>
+  </div>
+</div>

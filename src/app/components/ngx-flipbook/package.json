@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "ngx-flipbook",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "gsap": "^2.0.1"
+  },
+  "peerDependencies": {
+    "@angular/common": "^5.1.0",
+    "@angular/core": "^5.1.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts",
+      "externals": {
+        "gsap": "^2.0.1"
+      }
+    },
+    "dest": "../../dist/ngx-flipbook"
+  }
+}

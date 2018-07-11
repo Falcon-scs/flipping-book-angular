@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>
+    Request changes - v{{mainService.config.revision}}
+    <button class="closeBtn" mat-dialog-close>
+      <mat-icon svgIcon="close" style="width:16px;height:16px;color:#333;"></mat-icon>
+  </button>
+</h2>
+
+<div class="content" *ngIf="requestStep === 1">
+    <div class="teaser">
+        <span>What to change?</span>
+    </div>
+    <div class="left">
+        <span class="actionTarget">Page</span>
+        <div class="selectable" (click)="selectPage()">
+            <img class="pageThumb" [src]="mainService.pagesUrl + data.thumbnail" [class.selected]="requestData.type === 0">
+            <div class="pageLabels">
+                <span class="fileName">{{leftPageIndex}}</span>
+                <span class="fileName">{{rightPageIndex}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <span class="actionTarget">Photos</span>
+        <div class="photosContainer">
+            <img *ngFor="let photo of data.photos" [src]="mainService.photosUrl + photo.sizes[1].fileName" [class.selected]="requestData.type === 1 && photo.selected" (click)="selectPhoto(photo)">
+        </div>
+    </div>
+    <div class="error">
+        <mat-error *ngIf="error.length">{{error}}</mat-error>
+    </div>
+</div>
+
+<div class="content step2" *ngIf="requestStep === 2">
+    <div class="teaser">
+        <span>Changes on {{changeTitle}}</span>
+    </div>
+    <div class="left">
+        <img class="actionThumb" [src]="changeThumbUrl">
+        <div class="pageLabels" *ngIf="requestData.type === 0">
+            <span class="fileName">{{leftPageIndex}}</span>
+            <span class="fileName">{{rightPageIndex}}</span>
+        </div>
+        <div class="pageLabels" *ngIf="requestData.type === 1">
+            <span class="fileName">{{changeTitle}}</span>
+        </div>
+    </div>
+    <form class="right" (ngSubmit)="requestConfirm()" id="actionForm">
+        <mat-form-field>
+            <mat-select placeholder="Action" required [(value)]="requestData.action" [formControl]="actionFormControl">
+                <mat-option *ngFor="let action of changeActions" [value]="action">
+                    {{ action }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="actionFormControl.touched && actionFormControl.invalid">
+                Action is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput maxlength="120" #message placeholder="Leave a comment" style="resize: none" cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
+            <mat-hint align="start">Optional</mat-hint>
+            <mat-hint align="end">{{message.value.length}} / 120</mat-hint>
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions *ngIf="requestStep === 1">
+    <button mat-button (click)="cancel()">CANCEL</button>
+    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+</div>
+
+<div mat-dialog-actions *ngIf="requestStep === 2">
+    <button mat-button (click)="back()">BACK</button>
+    <button mat-raised-button color="primary" [disabled]="!actionFormControl.touched || actionFormControl.invalid" form="actionForm">CONFIRM</button>
+</div>

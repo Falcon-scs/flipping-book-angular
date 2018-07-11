@@ -1,0 +1,170 @@
+:host {
+    position: relative;
+}
+
+h2 {
+    color: black;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.closeBtn {
+    float: right;
+    margin-top: -5px;
+    margin-right: -5px;
+    border: none;
+    padding: 0;
+    line-height: 1em;
+    background: none;
+    cursor: pointer;
+}
+
+.content {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.teaser {
+    grid-area: teaser;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+        font-family: 'Roboto';
+        font-weight: 300;
+        font-size: 24px;
+        color: #c7c7c7;
+    }
+}
+
+
+
+.actionTarget {
+    text-align: center;
+    color: black;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.fileName {
+    font-family: Roboto;
+    font-size: 12px;
+    color: #999;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.body-icon-satisfied {
+    width: 100%;
+    text-align: center;
+    color: #c7c7c7;
+    margin-top: 10px;
+    mat-icon {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
+
+.body-text {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.confirm-text {
+    max-width: 500px;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 50px;
+    color: #777;
+    font-size: 16px;
+    font-family: Roboto;
+}
+
+$circle-length: 151px;
+$check-length: 36px;
+
+@keyframes scaleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drawCircle {
+  0% {
+    stroke-dashoffset: $circle-length;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawCheck {
+  0% {
+    stroke-dashoffset: $check-length;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#successAnimationCircle {
+  stroke-dasharray: $circle-length $circle-length;
+  stroke: #428f40;
+}
+
+#successAnimationCheck {
+  stroke-dasharray: $check-length $check-length;
+  stroke: #428f40;
+}
+
+#successAnimationResult {
+  fill: #428f40;
+  opacity: 0;
+}
+
+#successAnimation.animated {
+  animation: 1s ease-out 0s 1 both scaleAnimation;
+
+  #successAnimationCircle {
+    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle,
+               0.3s linear 0.9s 1 both fadeOut;
+  }
+
+  #successAnimationCheck {
+    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck,
+               0.3s linear 0.9s 1 both fadeOut;
+  }
+
+  #successAnimationResult {
+    animation: 0.3s linear 0.9s both fadeIn;
+  }
+}

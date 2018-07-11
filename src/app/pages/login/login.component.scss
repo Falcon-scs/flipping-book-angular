@@ -1,0 +1,46 @@
+@import '../../theme/style.scss';
+:host {
+    background-color: #f5f5f5;
+}
+
+.background-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-size: cover;
+    filter: blur(5px);
+}
+
+.form {
+    width: 400px;
+    margin: auto;
+    padding: 50px;
+}
+
+.header {
+    margin: auto;
+    padding-top: 20vh;
+}
+
+.header p.title {
+    text-align: center;
+    color: #9d9d9d;
+    font-size: 6vw;
+    font-family: 'Roboto';
+    font-weight: 100;
+}
+
+.header hr {
+    width: 100px;
+    margin: 20px auto 10px auto;
+    border-top-color: #bebebe;
+    opacity: 0.5;
+}
+
+.header .version {
+    text-align: center;
+    color: #bebebe;
+    font-size: 14px;
+    font-weight: 300;
+}

@@ -1,0 +1,12 @@
+<div class="closeContainer">
+    <button mat-icon-button class="closeBtn" (click)="close()">
+        <mat-icon svgIcon="close" style="width: 16px;height: 16px;"></mat-icon>
+    </button>
+</div>
+<div class="thumbcontent">
+    <div *ngFor="let thumb of thumbs" class="thumbitem">
+        <div class="thumbBox">
+            <img [src]="thumb" alt="" class="thumb-img">
+        </div>
+    </div>
+</div>

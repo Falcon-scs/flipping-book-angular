@@ -1,0 +1,30 @@
+<div class="background-img" [style.background-image]="'url(' + background_img + ')'"></div>
+<div class="header">
+    <p class="title">{{config.name}}</p>
+    <hr>
+    <p class="version">v.{{config.revision}}</p>
+</div>
+<div class="form">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="input-full-width">
+            <input matInput formControlName="email" placeholder="Email" [(ngModel)]="email" required>
+            <mat-error>
+                <span mat-sufix *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">{{'invalid_email'}}</span>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+            <input matInput formControlName="pin" placeholder="Pin" [(ngModel)]="pin" [type]="'password'" required>
+            <mat-error>
+                <span mat-sufix *ngIf="!loginForm.get('pin').valid && loginForm.get('pin').touched">{{'invalid_pin'}}</span>
+            </mat-error>
+        </mat-form-field>
+        <span *ngIf="error.length" class="error mt-2">
+              <mat-icon style="height: 16px; width: 16px;" svgIcon="warning"></mat-icon>
+              {{error}}
+            </span>
+        <div style="text-align: center; margin-top: 20px">
+            <button mat-raised-button color="primary">{{'enter' | translate}}</button>
+        </div>
+    </form>
+</div>

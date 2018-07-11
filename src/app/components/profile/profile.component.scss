@@ -1,0 +1,43 @@
+.profile-panel:hover {
+    cursor: pointer;
+}
+
+.profile-photo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 20px;
+    font-family: 'Roboto';
+    font-weight: 100;
+    color: #777;
+    margin: 0 0 2px 0;
+    padding: 5px 0 0 0;
+}
+
+.profile-email {
+    font-size: 12px;
+    line-height: 1em;
+    font-family: 'Roboto';
+    font-weight: 100;
+    text-transform: lowercase;
+    color: #9E9E9E;
+    margin: 0;
+}
+
+.profile-photo-panel {
+    width: 50px;
+    float: left;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    margin-top: 10px;
+}
+
+.dropdown-menu p {
+    margin-bottom: 0px;
+    padding-left: 20px;
+}

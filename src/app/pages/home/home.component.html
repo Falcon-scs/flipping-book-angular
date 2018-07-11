@@ -1,0 +1,73 @@
+<div class="wrapper" [class.show-messages]="messageboxOpened" [class.animate]="!resizingWindow">
+    <div class="user">
+        <app-profile></app-profile>
+    </div>
+    <div class="title">
+        <span class="filp-title-normal">
+            {{config.name}}
+            <span class="filp-title-version-normal">v.1</span>
+        </span>
+    </div>
+    <div class="fullscreen">
+        <button mat-icon-button>
+            <mat-icon class="small-icon-button" svgIcon="share"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="fullscreen()">
+            <mat-icon class="small-icon-button" svgIcon="expand"></mat-icon>
+        </button>
+    </div>
+    <div class="main">
+        <div class="book-container">
+            <div class="left-bar">
+                <button mat-icon-button (click)="flipService.prev.next()">
+                    <mat-icon svgIcon="left-arrow"></mat-icon>
+                </button>
+            </div>
+            <div class="book">
+                <ngx-flipbook #flipbook *ngIf="flipService.book && initialized" [model]="flipService.book">
+                </ngx-flipbook>
+            </div>
+            <div class="right-bar">
+                <div class="right-bar-top">
+                    <button mat-fab color="primary" (click)="showMessages(true)" *ngIf="!messageboxOpened">
+                        <mat-icon svgIcon="chat" style="color: white"></mat-icon>
+                        <span class="unreadBadge" *ngIf="unreadMessages > 0">{{unreadMessages}}</span>
+                    </button>
+                    <button mat-fab color="accent" style="margin-top: 15px" (click)="requestApprove()" *ngIf="!messageboxOpened">
+                        <mat-icon svgIcon="check" style="color: white"></mat-icon>
+                    </button>
+                </div>
+                <div class="right-bar-middle">
+                    <button mat-icon-button (click)="flipService.next.next()">
+                    <mat-icon svgIcon="right-arrow"></mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="bottom-bar">
+                <div>
+                    <button mat-icon-button style="margin-left: -10px;" (click)="showThumbnails()">
+                        <mat-icon class="small-icon-button" svgIcon="grid"></mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="reload()">
+                        <mat-icon class="small-icon-button" svgIcon="refresh"></mat-icon>
+                    </button>
+                </div>
+                <div class="bottom-bar-center">
+                    <button mat-icon-button (click)="flipService.play.next()">
+                        <mat-icon svgIcon="play"></mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="flipService.pause.next()">
+                        <mat-icon svgIcon="pause"></mat-icon>
+                    </button>
+                </div>
+                <div class="bottom-bar-right">
+                    <button mat-raised-button color="primary" *ngIf="!messageboxOpened" (click)="requestChanges()">{{'request_changes' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-messages #messages [opened]="messageboxOpened" (unread)="unreadMessages = $event" (openedChanged)="showMessages($event)" (approved)="requestApprove()">
+</app-messages>
